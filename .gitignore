@@ -1,0 +1,19 @@
+### react ###
+.DS_*
+*.log
+logs
+**/*.backup.*
+**/*.back.*
+
+node_modules
+bower_components
+
+*.sublime*
+
+psd
+thumb
+sketch
+
+### Remix+CloudflarePages ###
+/functions/\[\[path\]\].js
+/functions/\[\[path\]\].js.map
