@@ -9,7 +9,9 @@
     "preview": "astro preview",
     "astro": "astro",
     "format:check": "prettier --check src/**/*.{ts,tsx,json,astro}",
-    "format::write": "prettier --write src/**/*.{ts,tsx,json,astro}"
+    "format::write": "prettier --write src/**/*.{ts,tsx,json,astro}",
+    "lint": "biome lint --write src/**/*",
+    "lint:fix": "biome check --write src/**/*"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
@@ -34,6 +36,7 @@
   },
   "packageManager": "pnpm@9.12.1+sha512.e5a7e52a4183a02d5931057f7a0dbff9d5e9ce3161e33fa68ae392125b79282a8a8a470a51dfc8a0ed86221442eb2fb57019b0990ed24fab519bf0e1bc5ccfc4",
   "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
     "@tailwindcss/typography": "^0.5.16",
     "prettier": "^3.5.3",
     "prettier-plugin-astro": "^0.14.1",

@@ -1,5 +1,5 @@
-import React from "react";
 import { cn } from "@/lib/utils";
+import React from "react";
 
 interface ContributionCalendarProps {
   data: Record<string, number>;
@@ -9,6 +9,11 @@ export function ContributionCalendar({ data }: ContributionCalendarProps) {
   // Get all dates sorted
   const dates = Object.keys(data).sort();
 
+  // Return early if no dates
+  if (dates.length === 0) {
+    return null;
+  }
+
   // Find max contribution to normalize colors
   const maxContribution = Math.max(...Object.values(data));
 
@@ -17,7 +22,7 @@ export function ContributionCalendar({ data }: ContributionCalendarProps) {
   let currentWeek: string[] = [];
 
   // Calculate the day of week for the first date (0 = Sunday, 6 = Saturday)
-  const firstDate = new Date(dates[0]);
+  const firstDate = new Date(dates[0] as string);
   const firstDayOfWeek = firstDate.getDay();
 
   // Add empty cells for the first week if needed
@@ -27,7 +32,7 @@ export function ContributionCalendar({ data }: ContributionCalendarProps) {
 
   // Group all dates into weeks
   dates.forEach((date) => {
-    const day = new Date(date).getDay();
+    const day = new Date(date as string).getDay();
 
     // If it's a Sunday and we already have cells, start a new week
     if (day === 0 && currentWeek.length > 0) {
@@ -137,12 +142,16 @@ function generateMonthLabels(dates: string[]): string[] {
   const labels: string[] = [];
   let currentMonth = -1;
 
+  if (dates.length === 0) {
+    return [];
+  }
+
   for (let i = 0; i < dates.length; i++) {
-    const date = new Date(dates[i]);
+    const date = new Date(dates[i] as string);
     const month = date.getMonth();
 
     if (month !== currentMonth) {
-      labels.push(months[month]);
+      labels.push(months[month] as string);
       currentMonth = month;
     }
   }

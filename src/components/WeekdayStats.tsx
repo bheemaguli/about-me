@@ -1,5 +1,3 @@
-import React from "react";
-
 interface WeekdayStatsProps {
   data: Record<string, number>;
 }
@@ -59,5 +57,8 @@ function getMostActiveDay(
   data: { day: string; count: number; shortDay: string }[],
 ): string {
   const sorted = [...data].sort((a, b) => b.count - a.count);
-  return sorted[0].day;
+  if (sorted[0]) {
+    return sorted[0].day;
+  }
+  return "";
 }

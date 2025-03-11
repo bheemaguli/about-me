@@ -1,4 +1,3 @@
-import React from "react";
 import { Card, CardContent } from "./ui/card";
 
 interface MonthlyStatsProps {
@@ -20,7 +19,8 @@ export function MonthlyStats({
 
   const maxCodeChanges = Math.max(
     ...months.map(
-      (month) => codeChanges[month]?.added + codeChanges[month]?.deleted || 0,
+      (month) =>
+        (codeChanges[month]?.added ?? 0) + (codeChanges[month]?.deleted ?? 0),
     ),
   );
 
@@ -146,7 +146,10 @@ function formatMonthLabel(monthStr: string): string {
     "Nov",
     "Dec",
   ];
-  return `${shortMonths[parseInt(month) - 1]} ${year.slice(2)}`;
+  if (year && month) {
+    return `${shortMonths[Number.parseInt(month) - 1]} ${year.slice(2)}`;
+  }
+  return "";
 }
 
 function formatLineCount(count: number): string {

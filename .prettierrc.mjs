@@ -1,5 +1,3 @@
-import { file } from "astro/loaders";
-
 /** @type {import("prettier").Config} */
 export default {
   plugins: ["prettier-plugin-astro", "prettier-plugin-tailwindcss"],
@@ -10,5 +8,5 @@ export default {
         parser: "astro",
       },
     },
-  ]
+  ],
 };

@@ -1,5 +1,3 @@
-import React from "react";
-
 interface HourlyStatsProps {
   data: Record<string, number>;
 }
@@ -8,7 +6,7 @@ export function HourlyStats({ data }: HourlyStatsProps) {
   // Create array of hourly data
   const hours = Array.from({ length: 24 }, (_, i) => i.toString());
   const hourlyData = hours.map((hour) => ({
-    hour: parseInt(hour),
+    hour: Number.parseInt(hour),
     count: data[hour] || 0,
   }));
 

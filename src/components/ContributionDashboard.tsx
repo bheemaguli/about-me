@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+import { ContributionCalendar } from "./ContributionCalendar";
+import { HourlyStats } from "./HourlyStats";
+import { MonthlyStats } from "./MonthlyStats";
+import { WeekdayStats } from "./WeekdayStats";
 import {
   Card,
   CardContent,
@@ -7,10 +10,6 @@ import {
   CardTitle,
 } from "./ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
-import { ContributionCalendar } from "./ContributionCalendar";
-import { MonthlyStats } from "./MonthlyStats";
-import { WeekdayStats } from "./WeekdayStats";
-import { HourlyStats } from "./HourlyStats";
 
 interface GitStatsData {
   generated_at: string;
@@ -160,7 +159,7 @@ function StatsCard({
     <Card>
       <CardHeader className="flex flex-row items-center justify-between pb-2">
         <CardTitle className="text-sm font-medium">{title}</CardTitle>
-        <i className={`${icon} text-xl text-muted-foreground`}></i>
+        <i className={`${icon} text-xl text-muted-foreground`} />
       </CardHeader>
       <CardContent>
         <div className="text-2xl font-bold">{value}</div>
