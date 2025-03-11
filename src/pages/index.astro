@@ -1,36 +1,62 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import gitData from "../git_personal_stats_20250227.json";
+import { ContributionDashboard } from "../components/ContributionDashboard";
 ---
 
 <Layout title="Hi, It's me!">
-  <img src="/sumoiscoding.png" class="w-36 h-auto" />
+  <img src="/sumoiscoding.png" class="h-auto w-36" />
   <div class="prose dark:prose-invert">
     <span class="italic">Hi 👋, my name is</span>
     <h1>Sumanth Kashyap</h1>
     <article>
       <p>
-        I develop software for <a href="https://github.com/bheemaguli/resume/blob/main/bheemaguli.jpg" target="_blank">living</a>. You can find me 
-        tinkering with Django, React and many more cool stuff at <a href="https://gstzen.in/cloudzen-info" target="_blank">CloudZen Software Labs</a>.
-        </p>
+        I develop software for <a
+          href="https://github.com/bheemaguli/resume/blob/main/bheemaguli.jpg"
+          target="_blank"
+          class="underline hover:text-blue-500">living</a
+        >. You can find me tinkering with Django, React and many more cool stuff
+        at <a
+          href="https://gstzen.in/cloudzen-info"
+          target="_blank"
+          class="underline hover:text-blue-500">CloudZen Software Labs</a
+        >.
+      </p>
       <p>
-        Whether it's fiction, non-fiction,
-        or technical literature, I'm facinated by all. 
+        Whether it's fiction, non-fiction, or technical literature, I'm
+        facinated by all.
         <br />Currently, my interests lie in.... hmm... lets see....
         <ul>
           <li>Data structures</li>
           <li>Villans of Ayn Rand</li>
           <li>Distributed systems</li>
-          <li>Austrian school of economics and the monetary significance of distributed currencies</li>
-          <li>Concepts of vectorization and vector databases.</li>
-          <li>... and more!w</li>
+          <li>
+            Austrian school of economics and the monetary significance of
+            distributed currencies
+          </li>
+          <li>Concepts of tokenization and vector databases.</li>
+          <li>... and more!</li>
         </ul>
       </p>
-      <p>When I'm not deep into a projects, you'll likely find me experimenting
+      <p>
+        When I'm not deep into a projects, you'll likely find me experimenting
         with new technologies, doing heavy squats or <a
           href="https://www.strava.com/athletes/12062615"
           target="_blank">cycling</a
         > through the scenic countryside around Bengaluru.
       </p>
     </article>
+  </div>
+  <div class="mt-12">
+    <h2 class="text-2xl font-bold">Contribution Dashboard</h2>
+    <p class="mb-4 text-sm text-muted-foreground">
+      You don't see me much on GitHub, because I'm busy cooking at
+      <a
+        href="https://gstzen.in/cloudzen-info"
+        target="_blank"
+        class="underline hover:text-blue-500">CloudZen</a
+      >
+    </p>
+    <ContributionDashboard data={gitData} client:load />
   </div>
 </Layout>

@@ -49,9 +49,9 @@ import { Mail, Phone } from "lucide-react";
       }
     </script>
   </head>
-  <body class="min-h-screen bg-background text-foreground font-fira">
+  <body class="min-h-screen bg-background font-fira text-foreground">
     <header
-      class="sticky max-w-6xl mx-auto top-0 z-50 flex justify-end gap-1 w-full p-4 border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
+      class="sticky top-0 z-50 mx-auto flex w-full max-w-6xl justify-end gap-1 border-border/40 bg-background/95 p-4 backdrop-blur supports-[backdrop-filter]:bg-background/60"
     >
       <a href="tel:+91 9482171096" target="_blank">
         <Button variant="outline" size="icon" title="Call me">
@@ -73,12 +73,17 @@ import { Mail, Phone } from "lucide-react";
           <Github />
         </Button></a
       >
+      <a href="/stats">
+        <Button variant="outline" size="icon" title="Git Stats">
+          <i class="ph ph-git-branch"></i>
+        </Button>
+      </a>
       <div class="ml-auto">
         <ModeToggle client:load />
       </div>
     </header>
     <div
-      class="relative flex min-h-screen flex-col bg-background max-w-6xl mx-auto p-4 sm:p-6 md:p-8"
+      class="relative mx-auto flex min-h-screen max-w-6xl flex-col bg-background p-4 sm:p-6 md:p-8"
     >
       <main class="flex-1">
         <div class="container relative py-10">

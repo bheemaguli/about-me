@@ -1,0 +1,16 @@
+---
+import Layout from "../layouts/Layout.astro";
+import gitData from "../git_personal_stats_20250227.json";
+import { ContributionDashboard } from "../components/ContributionDashboard";
+---
+
+<Layout title="Git Contribution Stats | Sumanth Kashyap">
+  <div class="prose prose-lg mb-6 dark:prose-invert">
+    <h1>Git Contribution Stats</h1>
+    <p class="text-muted-foreground">
+      A visualization of my Git activity over the past year
+    </p>
+  </div>
+
+  <ContributionDashboard data={gitData} client:load />
+</Layout>
