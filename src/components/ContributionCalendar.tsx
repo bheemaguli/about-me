@@ -59,7 +59,7 @@ export function ContributionCalendar({ data }: ContributionCalendarProps) {
   return (
     <div className="space-y-3 overflow-auto">
       {/* Month labels */}
-      <div className="flex pl-7 text-xs text-muted-foreground">
+      <div className="text-muted-foreground flex pl-7 text-xs">
         {monthLabels.map((month, i) => (
           <div key={i} className="flex-1">
             {month}
@@ -70,13 +70,13 @@ export function ContributionCalendar({ data }: ContributionCalendarProps) {
       <div className="flex flex-col">
         <div className="grid grid-flow-col grid-rows-7 gap-1 text-xs">
           {/* Day of week labels (side) */}
-          <div className="row-span-1 pr-2 text-right text-muted-foreground">
+          <div className="text-muted-foreground row-span-1 pr-2 text-right">
             Mon
           </div>
-          <div className="row-span-1 pr-2 text-right text-muted-foreground">
+          <div className="text-muted-foreground row-span-1 pr-2 text-right">
             Wed
           </div>
-          <div className="row-span-1 pr-2 text-right text-muted-foreground">
+          <div className="text-muted-foreground row-span-1 pr-2 text-right">
             Fri
           </div>
 

@@ -29,16 +29,16 @@ export function WeekdayStats({ data }: WeekdayStatsProps) {
 
           return (
             <div key={day} className="flex flex-col items-center">
-              <div className="relative h-40 w-full rounded-md bg-muted/20">
+              <div className="bg-muted/20 relative h-40 w-full rounded-md">
                 <div
-                  className="absolute bottom-0 w-full rounded-md bg-chart-5"
+                  className="bg-chart-5 absolute bottom-0 w-full rounded-md"
                   style={{ height: `${percentage}%` }}
                 />
                 <div className="absolute inset-0 flex items-center justify-center text-sm font-medium">
                   {count}
                 </div>
               </div>
-              <div className="mt-2 text-sm text-muted-foreground">
+              <div className="text-muted-foreground mt-2 text-sm">
                 {shortDay}
               </div>
             </div>

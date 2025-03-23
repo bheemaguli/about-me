@@ -137,7 +137,7 @@ export function ContributionDashboard({ data }: { data: GitStatsData }) {
         </TabsContent>
       </Tabs>
 
-      <p className="text-right text-xs text-muted-foreground">
+      <p className="text-muted-foreground text-right text-xs">
         Data generated on {generatedDate}
       </p>
     </div>
@@ -159,11 +159,11 @@ function StatsCard({
     <Card>
       <CardHeader className="flex flex-row items-center justify-between pb-2">
         <CardTitle className="text-sm font-medium">{title}</CardTitle>
-        <i className={`${icon} text-xl text-muted-foreground`} />
+        <i className={`${icon} text-muted-foreground text-xl`} />
       </CardHeader>
       <CardContent>
         <div className="text-2xl font-bold">{value}</div>
-        <p className="text-xs text-muted-foreground">{description}</p>
+        <p className="text-muted-foreground text-xs">{description}</p>
       </CardContent>
     </Card>
   );

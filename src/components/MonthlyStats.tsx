@@ -43,17 +43,17 @@ export function MonthlyStats({
                 <div key={month} className="flex flex-1 flex-col items-center">
                   <div className="flex w-full flex-col items-center space-y-1">
                     <div
-                      className="w-full rounded-t bg-chart-1"
+                      className="bg-chart-1 w-full rounded-t"
                       style={{ height: `${commitHeight}%` }}
                       title={`${commitCount} commits in ${formattedMonth}`}
                     />
                     <div
-                      className="w-full rounded-t bg-chart-2"
+                      className="bg-chart-2 w-full rounded-t"
                       style={{ height: `${prHeight}%` }}
                       title={`${prCount} PRs in ${formattedMonth}`}
                     />
                   </div>
-                  <div className="mt-2 origin-left rotate-45 text-xs text-muted-foreground">
+                  <div className="text-muted-foreground mt-2 origin-left rotate-45 text-xs">
                     {formattedMonth}
                   </div>
                 </div>
@@ -62,11 +62,11 @@ export function MonthlyStats({
           </div>
           <div className="mt-8 flex justify-center space-x-4">
             <div className="flex items-center space-x-1">
-              <div className="h-3 w-3 rounded-sm bg-chart-1" />
+              <div className="bg-chart-1 h-3 w-3 rounded-sm" />
               <span className="text-xs">Commits</span>
             </div>
             <div className="flex items-center space-x-1">
-              <div className="h-3 w-3 rounded-sm bg-chart-2" />
+              <div className="bg-chart-2 h-3 w-3 rounded-sm" />
               <span className="text-xs">Pull Requests</span>
             </div>
           </div>
@@ -99,15 +99,15 @@ export function MonthlyStats({
                     title={`${formatLineCount(added)} added, ${formatLineCount(deleted)} deleted in ${formattedMonth}`}
                   >
                     <div
-                      className="absolute bottom-0 w-full rounded-t bg-chart-3"
+                      className="bg-chart-3 absolute bottom-0 w-full rounded-t"
                       style={{ height: `${deletedProportion * 100}%` }}
                     />
                     <div
-                      className="absolute bottom-0 w-full rounded-t bg-chart-4"
+                      className="bg-chart-4 absolute bottom-0 w-full rounded-t"
                       style={{ height: `${addedProportion * 100}%` }}
                     />
                   </div>
-                  <div className="mt-2 origin-left rotate-45 text-xs text-muted-foreground">
+                  <div className="text-muted-foreground mt-2 origin-left rotate-45 text-xs">
                     {formattedMonth}
                   </div>
                 </div>
@@ -116,11 +116,11 @@ export function MonthlyStats({
           </div>
           <div className="mt-8 flex justify-center space-x-4">
             <div className="flex items-center space-x-1">
-              <div className="h-3 w-3 rounded-sm bg-chart-4" />
+              <div className="bg-chart-4 h-3 w-3 rounded-sm" />
               <span className="text-xs">Lines Added</span>
             </div>
             <div className="flex items-center space-x-1">
-              <div className="h-3 w-3 rounded-sm bg-chart-3" />
+              <div className="bg-chart-3 h-3 w-3 rounded-sm" />
               <span className="text-xs">Lines Deleted</span>
             </div>
           </div>

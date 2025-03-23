@@ -37,7 +37,7 @@ export function HourlyStats({ data }: HourlyStatsProps) {
                 title={`${count} commits at ${displayHour}`}
               />
               {hour % 3 === 0 && (
-                <div className="mt-2 origin-left rotate-45 text-xs text-muted-foreground">
+                <div className="text-muted-foreground mt-2 origin-left rotate-45 text-xs">
                   {displayHour}
                 </div>
               )}
@@ -48,19 +48,19 @@ export function HourlyStats({ data }: HourlyStatsProps) {
 
       <div className="flex justify-center space-x-4">
         <div className="flex items-center space-x-1">
-          <div className="h-3 w-3 rounded-sm bg-chart-4" />
+          <div className="bg-chart-4 h-3 w-3 rounded-sm" />
           <span className="text-xs">Morning (5AM-12PM)</span>
         </div>
         <div className="flex items-center space-x-1">
-          <div className="h-3 w-3 rounded-sm bg-chart-2" />
+          <div className="bg-chart-2 h-3 w-3 rounded-sm" />
           <span className="text-xs">Afternoon (12PM-6PM)</span>
         </div>
         <div className="flex items-center space-x-1">
-          <div className="h-3 w-3 rounded-sm bg-chart-5" />
+          <div className="bg-chart-5 h-3 w-3 rounded-sm" />
           <span className="text-xs">Evening (6PM-10PM)</span>
         </div>
         <div className="flex items-center space-x-1">
-          <div className="h-3 w-3 rounded-sm bg-chart-3" />
+          <div className="bg-chart-3 h-3 w-3 rounded-sm" />
           <span className="text-xs">Night (10PM-5AM)</span>
         </div>
       </div>
