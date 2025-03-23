@@ -8,8 +8,8 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "./ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
+} from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 interface GitStatsData {
   generated_at: string;
