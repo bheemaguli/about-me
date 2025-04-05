@@ -1,8 +1,6 @@
-interface WeekdayStatsProps {
-  data: Record<string, number>;
-}
+import { getMostActiveDay } from "./utils";
 
-export function WeekdayStats({ data }: WeekdayStatsProps) {
+export function WeekdayStats({ data }: { data: Record<string, number> }) {
   // Order weekdays correctly
   const orderedDays = [
     "Sunday",
@@ -51,14 +49,4 @@ export function WeekdayStats({ data }: WeekdayStatsProps) {
       </p>
     </div>
   );
-}
-
-function getMostActiveDay(
-  data: { day: string; count: number; shortDay: string }[],
-): string {
-  const sorted = [...data].sort((a, b) => b.count - a.count);
-  if (sorted[0]) {
-    return sorted[0].day;
-  }
-  return "";
 }

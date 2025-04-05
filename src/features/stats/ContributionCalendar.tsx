@@ -1,13 +1,20 @@
 import { cn } from "@/lib/utils";
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import { Contributioncalendar } from "./types";
 
-interface ContributionCalendarProps {
-  data: Record<string, number>;
-}
+export function ContributionCalendar({ data }: { data: Contributioncalendar }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const parsedData = Contributioncalendar.parse(data);
+  const dailyCommits = parsedData.daily_commits;
 
-export function ContributionCalendar({ data }: ContributionCalendarProps) {
+  useEffect(() => {
+    if (containerRef.current) {
+      containerRef.current.scrollLeft = containerRef.current.scrollWidth;
+    }
+  }, []);
+
   // Get all dates sorted
-  const dates = Object.keys(data).sort();
+  const dates = Object.keys(dailyCommits).sort();
 
   // Return early if no dates
   if (dates.length === 0) {
@@ -15,7 +22,7 @@ export function ContributionCalendar({ data }: ContributionCalendarProps) {
   }
 
   // Find max contribution to normalize colors
-  const maxContribution = Math.max(...Object.values(data));
+  const maxContribution = Math.max(...Object.values(dailyCommits));
 
   // Group dates by week for display
   const weeks: string[][] = [];
@@ -55,64 +62,75 @@ export function ContributionCalendar({ data }: ContributionCalendarProps) {
 
   // Create month labels for top of calendar
   const monthLabels = generateMonthLabels(dates);
-
-  return (
-    <div className="space-y-3 overflow-auto">
-      {/* Month labels */}
-      <div className="text-muted-foreground flex pl-7 text-xs">
-        {monthLabels.map((month, i) => (
-          <div key={i} className="flex-1">
-            {month}
-          </div>
-        ))}
-      </div>
-
-      <div className="flex flex-col">
-        <div className="grid grid-flow-col grid-rows-7 gap-1 text-xs">
-          {/* Day of week labels (side) */}
-          <div className="text-muted-foreground row-span-1 pr-2 text-right">
-            Mon
-          </div>
-          <div className="text-muted-foreground row-span-1 pr-2 text-right">
-            Wed
-          </div>
-          <div className="text-muted-foreground row-span-1 pr-2 text-right">
-            Fri
-          </div>
-
-          {/* Calendar grid */}
-          {weeks.map((week, weekIdx) => (
-            <React.Fragment key={weekIdx}>
-              {week.map((date, dayIdx) => {
-                const contributions = date ? data[date] || 0 : 0;
-                const level = getContributionLevel(
-                  contributions,
-                  maxContribution,
-                );
-
-                return (
-                  <div
-                    key={`${weekIdx}-${dayIdx}`}
-                    className={cn(
-                      "h-3 w-3 rounded-sm",
-                      getColorClass(level),
-                      date ? "cursor-pointer" : "opacity-0",
-                    )}
-                    title={
-                      date ? `${date}: ${contributions} contributions` : ""
-                    }
-                  />
-                );
-              })}
-            </React.Fragment>
+  const MonthLabels = () => {
+    return (
+      <div
+        className="ml-6 flex flex-col items-center text-sm"
+        style={{ width: `${20 * weeks.length}px` }}
+      >
+        <div className="flex w-full">
+          {monthLabels.map((month, i) => (
+            <div key={i} className="flex-1 text-center">
+              {month}
+            </div>
           ))}
         </div>
       </div>
+    );
+  };
+  return (
+    <div className="flex flex-col gap-4">
+      <div className="flex flex-row items-center">
+        <div className="mt-6 flex flex-col space-y-3 text-xs">
+          {["", "Mon", "", "Wed", "", "Fri", ""].map((day) => (
+            <div className="text-muted-foreground row-span-1 pr-2 text-right">
+              {day}
+            </div>
+          ))}
+        </div>
+        <div
+          className="flex flex-col space-y-3 overflow-auto"
+          ref={containerRef}
+        >
+          <MonthLabels />
+          <div className="flex flex-col">
+            <div className="grid grid-flow-col grid-rows-7 gap-1 pb-2 text-xs">
+              {weeks.map((week, weekIdx) => (
+                <React.Fragment key={weekIdx}>
+                  {week.map((date, dayIdx) => {
+                    const contributions = date ? dailyCommits[date] || 0 : 0;
+                    const level = getContributionLevel(
+                      contributions,
+                      maxContribution,
+                    );
 
-      {/* Legend */}
+                    return (
+                      <div className="flex h-4 w-4 items-center justify-center overflow-hidden rounded-sm border">
+                        <div
+                          key={`${weekIdx}-${dayIdx}`}
+                          className={cn(
+                            "h-4 w-4",
+                            getColorClass(level),
+                            date ? "cursor-pointer" : "opacity-0",
+                          )}
+                          title={
+                            date
+                              ? `${date}: ${contributions} contributions`
+                              : ""
+                          }
+                        />
+                      </div>
+                    );
+                  })}
+                </React.Fragment>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
       <div className="flex items-center justify-end space-x-2 text-xs">
         <span className="text-muted-foreground">Less</span>
-        {[0, 1, 2, 3, 4].map((level) => (
+        {[1, 2, 3, 4].map((level) => (
           <div
             key={level}
             className={cn("h-3 w-3 rounded-sm", getColorClass(level))}
@@ -142,16 +160,18 @@ function generateMonthLabels(dates: string[]): string[] {
   const labels: string[] = [];
   let currentMonth = -1;
 
-  if (dates.length === 0) {
-    return [];
-  }
+  // Calculate number of weeks
+  const totalWeeks = Math.ceil(dates.length / 7);
 
-  for (let i = 0; i < dates.length; i++) {
-    const date = new Date(dates[i] as string);
+  for (let weekIndex = 0; weekIndex < totalWeeks; weekIndex++) {
+    const dateIndex = weekIndex * 7;
+    if (dateIndex >= dates.length) break;
+
+    const date = new Date(dates[dateIndex]);
     const month = date.getMonth();
 
     if (month !== currentMonth) {
-      labels.push(months[month] as string);
+      labels.push(months[month]);
       currentMonth = month;
     }
   }
@@ -171,7 +191,7 @@ function getContributionLevel(count: number, max: number): number {
 function getColorClass(level: number): string {
   switch (level) {
     case 0:
-      return "bg-muted/20";
+      return "bg-transparent";
     case 1:
       return "bg-chart-1/30";
     case 2:

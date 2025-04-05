@@ -1,21 +1,24 @@
-interface HourlyStatsProps {
-  data: Record<string, number>;
-}
+import type { Hourlyactivity } from "./types";
+import { formatHour } from "./utils";
 
-export function HourlyStats({ data }: HourlyStatsProps) {
-  // Create array of hourly data
-  const hours = Array.from({ length: 24 }, (_, i) => i.toString());
-  const hourlyData = hours.map((hour) => ({
-    hour: Number.parseInt(hour),
+export function HourlyStats({ data }: { data: Hourlyactivity }) {
+  // Create array of hourly data in IST
+  const localHourlyData = Object.keys(data).map((hour) => ({
+    hour: (Number.parseInt(hour) + 5.5) % 24,
     count: data[hour] || 0,
   }));
+  // Lets set key to rounded hour and average count of 2 hours
+  const roundedHourlyData = localHourlyData.map((d) => ({
+    hour: Math.round(d.hour),
+    count: d.count / 2,
+  }));
 
-  const maxValue = Math.max(...hourlyData.map((d) => d.count));
+  const maxValue = Math.max(...roundedHourlyData.map((d) => d.count));
 
   return (
     <div className="space-y-4">
       <div className="flex h-64 items-end space-x-1">
-        {hourlyData.map(({ hour, count }) => {
+        {roundedHourlyData.map(({ hour, count }) => {
           const percentage = maxValue > 0 ? (count / maxValue) * 100 : 0;
           const displayHour = formatHour(hour);
 
@@ -30,14 +33,17 @@ export function HourlyStats({ data }: HourlyStatsProps) {
           else colorClass = "bg-chart-3"; // Night
 
           return (
-            <div key={hour} className="flex flex-1 flex-col items-center">
+            <div
+              key={hour}
+              className="relative flex h-full flex-1 flex-col items-center justify-end pt-10"
+            >
               <div
                 className={`w-full ${colorClass} rounded-t`}
                 style={{ height: `${percentage}%` }}
                 title={`${count} commits at ${displayHour}`}
               />
               {hour % 3 === 0 && (
-                <div className="text-muted-foreground mt-2 origin-left rotate-45 text-xs">
+                <div className="text-muted-foreground absolute top-0 mt-2 origin-left rotate-45 text-xs">
                   {displayHour}
                 </div>
               )}
@@ -66,10 +72,4 @@ export function HourlyStats({ data }: HourlyStatsProps) {
       </div>
     </div>
   );
-}
-
-function formatHour(hour: number): string {
-  const ampm = hour >= 12 ? "PM" : "AM";
-  const displayHour = hour % 12 || 12;
-  return `${displayHour}${ampm}`;
 }
