@@ -74,46 +74,46 @@ export function ContributionDashboard({ data }: { data: GitStatsData }) {
         />
       </div>
       <Tabs defaultValue="calendar">
-        <TabsList className="space-x-2">
+        <TabsList className="h-fit w-full flex-col items-start space-x-2 md:h-9 md:w-fit md:flex-row">
           <TabsTrigger value="calendar">Contribution Calendar</TabsTrigger>
           <TabsTrigger value="weekday">Weekday Pattern</TabsTrigger>
           <TabsTrigger value="hourly">Time of Day</TabsTrigger>
         </TabsList>
         <TabsContent value="calendar">
-          <Card>
+          <Card className="overflow-x-auto">
             <CardHeader>
               <CardTitle>Contribution Calendar</CardTitle>
               <CardDescription>
                 Commit activity over the past year (as of {generatedDate})
               </CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="min-w-sm">
               <ContributionCalendar data={parsedData.contribution_calendar} />
             </CardContent>
           </Card>
         </TabsContent>
         <TabsContent value="weekday">
-          <Card>
+          <Card className="overflow-x-auto">
             <CardHeader>
               <CardTitle>Weekday Contribution Pattern</CardTitle>
               <CardDescription>
                 When you contribute the most during the week
               </CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="min-w-sm">
               <WeekdayStats data={parsedData.weekday_activity} />
             </CardContent>
           </Card>
         </TabsContent>
         <TabsContent value="hourly">
-          <Card>
+          <Card className="overflow-x-auto">
             <CardHeader>
               <CardTitle>Time of Day Activity</CardTitle>
               <CardDescription>
                 When you're most active throughout the day
               </CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="min-w-sm">
               <HourlyStats data={parsedData.hourly_activity} />
             </CardContent>
           </Card>

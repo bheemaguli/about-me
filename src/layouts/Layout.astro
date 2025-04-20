@@ -9,7 +9,7 @@ import "@/styles/globals.css";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/common/ModeToggle";
 import { Github, Linkedin } from "simple-icons-astro";
-import { Mail, Phone } from "lucide-react";
+import { FileUser, Mail, Phone } from "lucide-react";
 ---
 
 <!doctype html>
@@ -53,6 +53,18 @@ import { Mail, Phone } from "lucide-react";
     <header
       class="border-border/40 bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 mx-auto flex w-full max-w-6xl justify-end gap-1 p-4 backdrop-blur"
     >
+      <a
+        href="https://github.com/bheemaguli/resume/blob/main/bheemaguli.pdf"
+        target="_blank"
+      >
+        <Button
+          size="icon"
+          className="bg-blue-500 hover:bg-blue-600 dark:bg-pink-500 dark:text-white dark:hover:bg-pink-600"
+          title="Resume"
+        >
+          <FileUser />
+        </Button></a
+      >
       <a href="tel:+91 9482171096" target="_blank">
         <Button variant="outline" size="icon" title="Call me">
           <Phone />
