@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import { ContributionDashboard } from "../features/stats";
 import gitData from "../../public/git_personal_stats.json";
+import { Image } from "astro:assets";
 ---
 
 <Layout title="Hi, It's me!">
@@ -42,6 +43,21 @@ import gitData from "../../public/git_personal_stats.json";
         > through the scenic countryside around Bengaluru.
       </p>
     </article>
+  </div>
+  <div
+    class="text-primary flex flex-col items-center justify-between rounded-lg bg-slate-200 p-6 md:flex-row dark:bg-slate-800"
+  >
+    <ul class="list-inside list-none">
+      <li>
+        <strong>WeightLifting</strong>:
+        <span class="font-semibold">SQT</span>:180kg,
+        <span class="font-semibold">DL</span>:220kg,
+        <span class="font-semibold">BP</span>:110kg,
+        <span class="font-semibold">OHP</span>:80kg,
+      </li>
+      <li><strong>Cycling</strong>: SR-2025</li>
+    </ul>
+    <Image src="/cool-sumo.png" alt="Cool Sumo" width={250} height={250} />
   </div>
   <div class="mt-12">
     <h2 class="text-2xl font-bold">Contribution Dashboard</h2>
