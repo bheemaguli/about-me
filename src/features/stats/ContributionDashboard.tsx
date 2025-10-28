@@ -8,9 +8,9 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ContributionCalendar } from "./ContributionCalendar";
 import { HourlyStats } from "./HourlyStats";
-import { WeekdayStats } from "./WeekdayStats";
 import { GitStatsData } from "./types";
 import { formatLineCount } from "./utils";
+import { WeekdayStats } from "./WeekdayStats";
 
 function StatsCard({
   title,
